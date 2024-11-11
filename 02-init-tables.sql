@@ -42,7 +42,7 @@ CREATE TABLE adopters(
     last_name VARCHAR2(100 CHAR) NOT NULL,
     email VARCHAR2(100 CHAR) NOT NULL,
     phone VARCHAR2(12 CHAR),
-    address VARCHAR2(200 CHAR)
+    address VARCHAR2(200 CHAR),
     application_date DATE DEFAULT SYSDATE
 )
 TABLESPACE users;
