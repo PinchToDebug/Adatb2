@@ -23,7 +23,7 @@ CREATE TABLE adoption_requests(
     request_id NUMBER PRIMARY KEY,
     pet_id NUMBER NOT NULL,
     adopter_id NUMBER NOT NULL,
-    status VARCHAR2(10 CHAR),  -- Pending / Approved / Rejected
+    status VARCHAR2(10 CHAR) NOT NULL,  -- Pending / Approved / Rejected
     requested_at TIMESTAMP,
     notes VARCHAR2(300 CHAR)
 )
