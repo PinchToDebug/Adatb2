@@ -49,3 +49,42 @@ TABLESPACE users;
 
 ALTER TABLE adoption_requests ADD CONSTRAINT fk_adopter_id
       FOREIGN KEY(adopter_id) REFERENCES adopters(adopter_id);
+
+
+-- VACCINE_TYPES TABLE 
+CREATE TABLE vaccine_types (
+    vaccine_id VARCHAR2(15) PRIMARY KEY,
+    name VARCHAR2(150 CHAR) NOT NULL,
+    description VARCHAR2(150 CHAR)
+)
+TABLESPACE users;
+
+
+-- SURGERY_TYPES TABLE
+CREATE TABLE surgery_types (
+    surgery_id VARCHAR2(15) PRIMARY KEY,
+    name VARCHAR2(150 CHAR) NOT NULL,
+    description VARCHAR2(150 CHAR)
+)
+TABLESPACE users;
+
+
+-- MEDICAL_HISTORY TABLE -- 
+CREATE TABLE medical_history(
+    record_id NUMBER PRIMARY KEY,
+    pet_id VARCHAR2(100 CHAR) NOT NULL,
+    date DATE DEFAULT SYSDATE,
+    treatment_type VARCHAR2(12 CHAR) NOT NULL, -- Vaccination / Surgery
+    treatment_id VARCHAR2(12 CHAR) NOT NULL,
+    notes VARCHAR2(300 CHAR)
+)
+TABLESPACE users;
+
+COMMENT ON COLUMN medical_history.treatment_type  IS 'Vaccination / Surgery';
+
+ALTER TABLE medical_history ADD CONSTRAINT fk_vaccine
+      FOREIGN KEY(treatment_id) REFERENCES vaccine_types(vaccine_id); 
+ALTER TABLE medical_history ADD CONSTRAINT fk_vaccine
+      FOREIGN KEY(treatment_id) REFERENCES surgery_types(surgery_id);
+
+
