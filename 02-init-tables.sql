@@ -9,7 +9,7 @@ CREATE TABLE pets(
     weight NUMBER(5, 2),       -- Weight in kilogram
     status VARCHAR2(10 CHAR),  -- Available / Adopted / Fostered
     notes VARCHAR2(300 CHAR),  -- Description of the pet
-    added_at TIMESTAMP
+    added_at TIMESTAMP DEFAULT SYSDATE
 )
 TABLESPACE users;
 
@@ -24,7 +24,7 @@ CREATE TABLE adoption_requests(
     pet_id NUMBER NOT NULL,
     adopter_id NUMBER NOT NULL,
     status VARCHAR2(10 CHAR) NOT NULL,  -- Pending / Approved / Rejected
-    requested_at TIMESTAMP,
+    requested_at TIMESTAMP DEFAULT SYSDATE,
     notes VARCHAR2(300 CHAR)
 )
 TABLESPACE users;
