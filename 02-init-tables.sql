@@ -33,3 +33,19 @@ COMMENT ON COLUMN adoption_requests.status  IS 'Status of the request. (Pending 
 
 ALTER TABLE adoption_requests ADD CONSTRAINT fk_pet_id
       FOREIGN KEY(pet_id) REFERENCES pets(pet_id);
+
+
+-- ADOPTERS TABLE -- 
+CREATE TABLE adopters(
+    adopter_id NUMBER PRIMARY KEY,
+    first_name VARCHAR2(100 CHAR) NOT NULL,
+    last_name VARCHAR2(100 CHAR) NOT NULL,
+    email VARCHAR2(100 CHAR) NOT NULL,
+    phone VARCHAR2(12 CHAR),
+    address VARCHAR2(200 CHAR)
+    application_date DATE DEFAULT SYSDATE
+)
+TABLESPACE users;
+
+ALTER TABLE adoption_requests ADD CONSTRAINT fk_adopter_id
+      FOREIGN KEY(adopter_id) REFERENCES adopters(adopter_id);
