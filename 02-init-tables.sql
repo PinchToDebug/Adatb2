@@ -13,7 +13,23 @@ CREATE TABLE pets(
 )
 TABLESPACE users;
 
-
 COMMENT ON COLUMN pets.weight IS 'Pets weight in kilogram.';
 COMMENT ON COLUMN pets.status IS 'Status of the pet. (Available / Adopted / Fostered)';
 COMMENT ON COLUMN pets.notes  IS 'Description and other information of the pet.';
+
+
+-- ADOPTION_REQUEST TABLE -- 
+CREATE TABLE adoption_requests(
+    request_id NUMBER PRIMARY KEY,
+    pet_id NUMBER NOT NULL,
+    adopter_id NUMBER NOT NULL,
+    status VARCHAR2(10 CHAR),  -- Pending / Approved / Rejected
+    requested_at TIMESTAMP,
+    notes VARCHAR2(300 CHAR)
+)
+TABLESPACE users;
+
+COMMENT ON COLUMN adoption_requests.status  IS 'Status of the request. (Pending / Approved / Rejected)';
+
+ALTER TABLE adoption_requests ADD CONSTRAINT fk_pet_id
+      FOREIGN KEY(pet_id) REFERENCES pets(pet_id);
