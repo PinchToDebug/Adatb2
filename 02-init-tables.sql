@@ -77,6 +77,7 @@ CREATE TABLE medical_history(
     treatment_type VARCHAR2(12 CHAR) NOT NULL, -- Vaccination / Surgery
     treatment_id   VARCHAR2(12 CHAR) NOT NULL,
     notes VARCHAR2(300 CHAR)
+	veterinarian_id NUMBER UNIQUE
 )
 TABLESPACE users;
 
@@ -87,3 +88,16 @@ ALTER TABLE medical_history ADD CONSTRAINT fk_vaccine
 ALTER TABLE medical_history ADD CONSTRAINT fk_surgery
       FOREIGN KEY(treatment_id) REFERENCES surgery_types(surgery_id);
 
+-- MEDICAL_HISTORY TABLE -- 
+CREATE TABLE veterinarians(
+    veterinarian_id NUMBER PRIMARY KEY,
+    first_name VARCHAR2(100 CHAR) NOT NULL,
+    last_name  VARCHAR2(100 CHAR) NOT NULL,
+    phone  VARCHAR2(12 CHAR),
+    email  VARCHAR2(100 CHAR),
+    specialization VARCHAR2(150)
+)
+TABLESPACE users;
+
+ALTER TABLE medical_history ADD CONSTRAINT fk_veterinarian_id
+      FOREIGN KEY(veterinarian_id) REFERENCES veterinarians(veterinarian_id);
