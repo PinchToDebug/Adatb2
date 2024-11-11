@@ -54,8 +54,8 @@ ALTER TABLE adoption_requests ADD CONSTRAINT fk_adopter_id
 -- VACCINE_TYPES TABLE 
 CREATE TABLE vaccine_types (
     vaccine_id VARCHAR2(15) PRIMARY KEY,
-    name VARCHAR2(150 CHAR) NOT NULL,
-    description VARCHAR2(150 CHAR)
+    v_name VARCHAR2(150 CHAR) NOT NULL,
+    v_desc VARCHAR2(150 CHAR)
 )
 TABLESPACE users;
 
@@ -63,8 +63,8 @@ TABLESPACE users;
 -- SURGERY_TYPES TABLE
 CREATE TABLE surgery_types (
     surgery_id VARCHAR2(15) PRIMARY KEY,
-    name VARCHAR2(150 CHAR) NOT NULL,
-    description VARCHAR2(150 CHAR)
+    s_name VARCHAR2(150 CHAR) NOT NULL,
+    s_desc VARCHAR2(150 CHAR)
 )
 TABLESPACE users;
 
@@ -73,7 +73,7 @@ TABLESPACE users;
 CREATE TABLE medical_history(
     record_id NUMBER PRIMARY KEY,
     pet_id VARCHAR2(100 CHAR) NOT NULL,
-    date DATE DEFAULT SYSDATE,
+    treatment_date DATE DEFAULT SYSDATE,
     treatment_type VARCHAR2(12 CHAR) NOT NULL, -- Vaccination / Surgery
     treatment_id VARCHAR2(12 CHAR) NOT NULL,
     notes VARCHAR2(300 CHAR)
@@ -84,7 +84,6 @@ COMMENT ON COLUMN medical_history.treatment_type  IS 'Vaccination / Surgery';
 
 ALTER TABLE medical_history ADD CONSTRAINT fk_vaccine
       FOREIGN KEY(treatment_id) REFERENCES vaccine_types(vaccine_id); 
-ALTER TABLE medical_history ADD CONSTRAINT fk_vaccine
+ALTER TABLE medical_history ADD CONSTRAINT fk_surgery
       FOREIGN KEY(treatment_id) REFERENCES surgery_types(surgery_id);
-
 
