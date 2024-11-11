@@ -12,3 +12,8 @@ CREATE TABLE pets(
     added_at TIMESTAMP
 )
 TABLESPACE users;
+
+
+COMMENT ON COLUMN pets.weight IS 'Pets weight in kilogram.';
+COMMENT ON COLUMN pets.status IS 'Status of the pet. (Available / Adopted / Fostered)';
+COMMENT ON COLUMN pets.notes  IS 'Description and other information of the pet.';
