@@ -25,7 +25,7 @@ CREATE TABLE adoption_requests(
     adopter_id NUMBER NOT NULL,
     status     VARCHAR2(10 CHAR) NOT NULL,  -- Pending / Approved / Rejected
     requested_at TIMESTAMP DEFAULT SYSDATE,
-    notes VARCHAR2(300 CHAR)
+    notes VARCHAR2(50 CHAR)
 )
 TABLESPACE users;
 
