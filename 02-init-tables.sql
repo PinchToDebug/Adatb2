@@ -88,6 +88,7 @@ ALTER TABLE medical_history ADD CONSTRAINT fk_vaccine
 ALTER TABLE medical_history ADD CONSTRAINT fk_surgery
       FOREIGN KEY(treatment_id) REFERENCES surgery_types(surgery_id);
 
+
 -- MEDICAL_HISTORY TABLE -- 
 CREATE TABLE veterinarians(
     veterinarian_id NUMBER PRIMARY KEY,
