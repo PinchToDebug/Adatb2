@@ -98,3 +98,37 @@ TABLESPACE users;
 
 ALTER TABLE medical_history ADD CONSTRAINT fk_veterinarian_id
       FOREIGN KEY(veterinarian_id) REFERENCES veterinarians(veterinarian_id);
+
+
+-- PET_LOG TABLE --
+CREATE TABLE pet_log (
+    pet_id        NUMBER,
+    pet_name      VARCHAR2(100 CHAR),
+    species       VARCHAR2(50 CHAR),
+    color         VARCHAR2(30 CHAR),
+    breed         VARCHAR2(50 CHAR),
+    age           NUMBER,
+    weight        NUMBER(5, 2),
+    status        VARCHAR2(10 CHAR),
+    notes         VARCHAR2(300 CHAR),
+    created_at    TIMESTAMP DEFAULT SYSDATE,
+    dml_flag      VARCHAR2(1 CHAR),
+    version       NUMBER,
+    mod_date      TIMESTAMP DEFAULT SYSDATE,
+    mod_user      VARCHAR2(250 CHAR)
+);
+
+
+-- LOG TABLE --
+CREATE TABLE log (
+    log_id       NUMBER PRIMARY KEY,
+    log_time     TIMESTAMP DEFAULT systimestamp,
+    severity     VARCHAR2(10),
+    sql_code     NUMBER,
+    message      VARCHAR2(4000),
+    api          VARCHAR2(100),
+    backtrace    VARCHAR2(4000)
+);
+
+COMMENT ON COLUMN log.api  IS 'Raiser of the Error';
+COMMENT ON TABLE  log IS 'Errors are logged here';
