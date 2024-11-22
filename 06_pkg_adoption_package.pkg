@@ -1,0 +1,178 @@
+CREATE OR REPLACE PACKAGE adoption_pck AS
+
+  -- submit_request
+  PROCEDURE submit_request(p_pet_id     IN NUMBER,
+                           p_adopter_id IN NUMBER,
+                           p_notes      IN VARCHAR2);
+
+  -- add_adopter
+  PROCEDURE add_adopter(p_first_name IN VARCHAR2,
+                        p_last_name  IN VARCHAR2,
+                        p_email      IN VARCHAR2,
+                        p_phone      IN VARCHAR2,
+                        p_address    IN VARCHAR2);
+
+  -- manage_adoption_request
+  PROCEDURE manage_adoption_request(p_request_id IN NUMBER,
+                                    p_action     IN VARCHAR2);
+
+  -- fn_is_pet_available
+  FUNCTION fn_is_pet_available(p_pet_id IN NUMBER) RETURN VARCHAR2;
+
+  -- fn_get_adopter_info
+  FUNCTION fn_get_adopter_info(p_adopter_id IN NUMBER) RETURN VARCHAR2;
+
+  -- fn_get_request_status
+  FUNCTION fn_get_request_status(p_request_id IN NUMBER) RETURN VARCHAR2;
+
+  -- add_pet
+  PROCEDURE add_pet(p_pet_name IN VARCHAR2,
+                    p_species  IN VARCHAR2,
+                    p_color    IN VARCHAR2,
+                    p_breed    IN VARCHAR2,
+                    p_age      IN NUMBER,
+                    p_weight   IN NUMBER,
+                    p_notes    IN VARCHAR2);
+
+END adoption_pck;
+/
+CREATE OR REPLACE PACKAGE BODY adoption_pck AS
+
+  -- submit_request WORKS
+  PROCEDURE submit_request(p_pet_id     IN NUMBER,
+                           p_adopter_id IN NUMBER,
+                           p_notes      IN VARCHAR2) AS
+  BEGIN
+    INSERT INTO adoption_requests
+      (request_id, pet_id, adopter_id, status, requested_at, notes)
+    VALUES
+      (seq_request_id.nextval,
+       p_pet_id,
+       p_adopter_id,
+       'Pending',
+       sysdate,
+       p_notes);
+    COMMIT;
+  END submit_request;
+
+  -- add_adopter  WORKS
+  PROCEDURE add_adopter(p_first_name IN VARCHAR2,
+                        p_last_name  IN VARCHAR2,
+                        p_email      IN VARCHAR2,
+                        p_phone      IN VARCHAR2,
+                        p_address    IN VARCHAR2) AS
+  BEGIN
+    INSERT INTO adopters
+      (adopter_id,
+       first_name,
+       last_name,
+       email,
+       phone,
+       address,
+       application_date)
+    VALUES
+      (seq_adopter_id.nextval,
+       p_first_name,
+       p_last_name,
+       p_email,
+       p_phone,
+       p_address,
+       sysdate);
+  END add_adopter;
+
+  -- manage_adoption_request WORKS
+  PROCEDURE manage_adoption_request(p_request_id IN NUMBER,
+                                    p_action     IN VARCHAR2) AS
+  BEGIN
+    IF p_action = 'Approve' THEN
+      UPDATE adoption_requests
+         SET status = 'Approved'
+       WHERE request_id = p_request_id;
+    ELSIF p_action = 'Reject' THEN
+      UPDATE adoption_requests
+         SET status = 'Rejected'
+       WHERE request_id = p_request_id;
+    END IF;
+  END manage_adoption_request;
+
+  -- fn_is_pet_available WORK
+  FUNCTION fn_is_pet_available(p_pet_id IN NUMBER) RETURN VARCHAR2 AS
+    v_status VARCHAR2(10);
+  BEGIN
+    SELECT status INTO v_status FROM pets WHERE pet_id = p_pet_id;
+    IF v_status = 'Available' THEN
+      RETURN 'Yes';
+    ELSE
+      RETURN 'No';
+    END IF;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+      RETURN 'Pet not found';
+  END fn_is_pet_available;
+
+  -- fn_get_adopter_info WORKS
+  FUNCTION fn_get_adopter_info(p_adopter_id IN NUMBER) RETURN VARCHAR2 AS
+    v_name  VARCHAR2(200);
+    v_email VARCHAR2(100);
+    v_phone VARCHAR2(20);
+  BEGIN
+    SELECT first_name || ' ' || last_name, email, phone
+      INTO v_name, v_email, v_phone
+      FROM adopters
+     WHERE adopter_id = p_adopter_id;
+    RETURN 'name: ' || v_name || ' | email: ' || v_email || ' | phone: ' || v_phone;
+  
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+      RETURN 'Adopter not found';
+  END fn_get_adopter_info;
+
+  -- fn_get_request_status WORKS
+  FUNCTION fn_get_request_status(p_request_id IN NUMBER) RETURN VARCHAR2 AS
+    v_status VARCHAR2(10);
+  BEGIN
+    SELECT status
+      INTO v_status
+      FROM adoption_requests
+     WHERE request_id = p_request_id;
+    RETURN v_status;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+      RETURN 'Request not found';
+  END fn_get_request_status;
+
+  -- add_pet WORKS
+  PROCEDURE add_pet(p_pet_name IN VARCHAR2,
+                    p_species  IN VARCHAR2,
+                    p_color    IN VARCHAR2,
+                    p_breed    IN VARCHAR2,
+                    p_age      IN NUMBER,
+                    p_weight   IN NUMBER,
+                    p_notes    IN VARCHAR2) AS
+  BEGIN
+    INSERT INTO pets
+      (pet_id,
+       pet_name,
+       species,
+       color,
+       breed,
+       age,
+       weight,
+       status,
+       notes,
+       version)
+    VALUES
+      (seq_pet_id.nextval,
+       p_pet_name,
+       p_species,
+       p_color,
+       p_breed,
+       p_age,
+       p_weight,
+       'Available',
+       p_notes,
+       1); commit;
+  END add_pet;
+
+END adoption_pck;
+/
