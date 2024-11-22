@@ -52,8 +52,8 @@ ALTER TABLE adoption_requests ADD CONSTRAINT fk_adopter_id
       FOREIGN KEY(adopter_id) REFERENCES adopters(adopter_id);
 
 
--- VACCINE_TYPES TABLE 
-CREATE TABLE vaccine_types (
+-- VACCINES TABLE 
+CREATE TABLE vaccines (
     vaccine_id VARCHAR2(15)   PRIMARY KEY,
     v_name VARCHAR2(150 CHAR) NOT NULL,
     v_desc VARCHAR2(150 CHAR)
@@ -61,8 +61,8 @@ CREATE TABLE vaccine_types (
 TABLESPACE users;
 
 
--- SURGERY_TYPES TABLE
-CREATE TABLE surgery_types (
+-- SURGERIES TABLE
+CREATE TABLE surgeries (
     surgery_id VARCHAR2(15)   PRIMARY KEY,
     s_name VARCHAR2(150 CHAR) NOT NULL,
     s_desc VARCHAR2(150 CHAR)
