@@ -9,7 +9,8 @@ CREATE TABLE pets(
     weight   NUMBER(5, 2),       -- Weight in kilogram
     status   VARCHAR2(10 CHAR),  -- Available / Adopted / Fostered
     notes    VARCHAR2(300 CHAR), -- Description of the pet
-    added_at TIMESTAMP DEFAULT SYSDATE
+    added_at TIMESTAMP DEFAULT SYSDATE,
+    version  NUMBER DEFAULT 1
 )
 TABLESPACE users;
 
@@ -76,20 +77,15 @@ CREATE TABLE medical_history(
     treatment_date DATE DEFAULT SYSDATE,
     treatment_type VARCHAR2(12 CHAR) NOT NULL, -- Vaccination / Surgery
     treatment_id   VARCHAR2(12 CHAR) NOT NULL,
-    notes VARCHAR2(300 CHAR)
-	veterinarian_id NUMBER UNIQUE
+    notes VARCHAR2(300 CHAR),
+    veterinarian_id NUMBER
 )
 TABLESPACE users;
 
 COMMENT ON COLUMN medical_history.treatment_type  IS 'Vaccination / Surgery';
 
-ALTER TABLE medical_history ADD CONSTRAINT fk_vaccine
-      FOREIGN KEY(treatment_id) REFERENCES vaccine_types(vaccine_id); 
-ALTER TABLE medical_history ADD CONSTRAINT fk_surgery
-      FOREIGN KEY(treatment_id) REFERENCES surgery_types(surgery_id);
 
-
--- MEDICAL_HISTORY TABLE -- 
+-- VETERANIANS TABLE -- 
 CREATE TABLE veterinarians(
     veterinarian_id NUMBER PRIMARY KEY,
     first_name VARCHAR2(100 CHAR) NOT NULL,
