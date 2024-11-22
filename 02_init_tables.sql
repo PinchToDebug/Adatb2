@@ -73,7 +73,7 @@ TABLESPACE users;
 -- MEDICAL_HISTORY TABLE -- 
 CREATE TABLE medical_history(
     record_id NUMBER PRIMARY KEY,
-    pet_id    VARCHAR2(100 CHAR) NOT NULL,
+    pet_id    NUMBER NOT NULL,
     treatment_date DATE DEFAULT SYSDATE,
     treatment_type VARCHAR2(12 CHAR) NOT NULL, -- Vaccination / Surgery
     treatment_id   VARCHAR2(12 CHAR) NOT NULL,
