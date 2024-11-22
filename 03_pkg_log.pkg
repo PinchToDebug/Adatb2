@@ -1,0 +1,35 @@
+CREATE OR REPLACE PACKAGE pkg_log IS
+  PROCEDURE log_error(p_message VARCHAR2 DEFAULT NULL, p_api VARCHAR2);
+END pkg_log;
+/
+CREATE OR REPLACE PACKAGE BODY pkg_log IS
+
+  PROCEDURE log_error(p_message VARCHAR2 DEFAULT NULL, p_api VARCHAR2) IS
+    v_sql_code NUMBER;
+    v_message  VARCHAR2(2000 CHAR);
+  
+    PRAGMA AUTONOMOUS_TRANSACTION;
+  BEGIN
+    v_sql_code := SQLCODE;
+  
+    IF p_message IS NULL THEN
+      v_message := SQLERRM;
+    ELSE
+      v_message := p_message;
+    END IF;
+  
+    INSERT INTO log
+      (log_id, log_time, severity, sql_code, message, api, backtrace)
+    VALUES
+      (seq_log_id.nextval,
+       systimestamp,
+       'ERROR',
+       v_sql_code,
+       v_message,
+       p_api,
+       dbms_utility.format_error_backtrace);
+    COMMIT;
+  
+  END log_error;
+END pkg_log;
+/
