@@ -1,12 +1,14 @@
 PL/SQL Developer Test script 3.0
-8
+10
 begin
   -- Either email or phone must be provided
-  add_veterinarian(p_first_name => :p_first_name,
-                   p_last_name => :p_last_name,
+  add_veterinarian(p_first_name     => :p_first_name,
+                   p_last_name      => :p_last_name,
                    p_specialization => :p_specialization,
-                   p_phone => :p_phone, 
-                   p_email => :p_email);
+                   p_phone          => :p_phone,
+                   p_email          => :p_email);
+  DBMS_OUTPUT.PUT_LINE(TO_CHAR(SYSDATE, 'HH24:MI:SS ') ||
+                       'Veterinarian added');
 end;
 5
 p_first_name
@@ -25,6 +27,7 @@ p_phone
 0
 5
 p_email
-0
+1
+drjohn@mail.com
 5
 0
