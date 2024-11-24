@@ -17,13 +17,13 @@ CREATE OR REPLACE PACKAGE adoption_pck AS
                                     p_action     IN VARCHAR2);
 
   -- fn_is_pet_available
-  FUNCTION fn_is_pet_available(p_pet_id IN NUMBER) RETURN VARCHAR2;
+  FUNCTION fn_is_pet_available(fn_pet_id IN NUMBER) RETURN VARCHAR2;
 
   -- fn_get_adopter_info
-  FUNCTION fn_get_adopter_info(p_adopter_id IN NUMBER) RETURN VARCHAR2;
+  FUNCTION fn_get_adopter_info(fn_adopter_id IN NUMBER) RETURN VARCHAR2;
 
   -- fn_get_request_status
-  FUNCTION fn_get_request_status(p_request_id IN NUMBER) RETURN VARCHAR2;
+  FUNCTION fn_get_request_status(fn_request_id IN NUMBER) RETURN VARCHAR2;
 
   -- add_pet
   PROCEDURE add_pet(p_pet_name IN VARCHAR2,
@@ -120,10 +120,10 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
 
 
   -- fn_is_pet_available WORK
-  FUNCTION fn_is_pet_available(p_pet_id IN NUMBER) RETURN VARCHAR2 AS
+  FUNCTION fn_is_pet_available(fn_pet_id IN NUMBER) RETURN VARCHAR2 AS
     v_status VARCHAR2(10);
   BEGIN
-    SELECT status INTO v_status FROM pets WHERE pet_id = p_pet_id;
+    SELECT status INTO v_status FROM pets WHERE pet_id = fn_pet_id;
     IF v_status = 'Available' THEN
       RETURN 'Yes';
     ELSE
@@ -135,7 +135,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
   END fn_is_pet_available;
 
   -- fn_get_adopter_info WORKS
-  FUNCTION fn_get_adopter_info(p_adopter_id IN NUMBER) RETURN VARCHAR2 AS
+  FUNCTION fn_get_adopter_info(fn_adopter_id IN NUMBER) RETURN VARCHAR2 AS
     v_name  VARCHAR2(200);
     v_email VARCHAR2(100);
     v_phone VARCHAR2(20);
@@ -143,7 +143,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
     SELECT first_name || ' ' || last_name, email, phone
       INTO v_name, v_email, v_phone
       FROM adopters
-     WHERE adopter_id = p_adopter_id;
+     WHERE adopter_id = fn_adopter_id;
     RETURN 'name: ' || v_name || ' | email: ' || v_email || ' | phone: ' || v_phone;
   
   EXCEPTION
@@ -152,13 +152,13 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
   END fn_get_adopter_info;
 
   -- fn_get_request_status WORKS
-  FUNCTION fn_get_request_status(p_request_id IN NUMBER) RETURN VARCHAR2 AS
+  FUNCTION fn_get_request_status(fn_request_id IN NUMBER) RETURN VARCHAR2 AS
     v_status VARCHAR2(10);
   BEGIN
     SELECT status
       INTO v_status
       FROM adoption_requests
-     WHERE request_id = p_request_id;
+     WHERE request_id = fn_request_id;
     RETURN v_status;
   EXCEPTION
     WHEN NO_DATA_FOUND THEN
