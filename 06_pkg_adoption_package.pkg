@@ -79,12 +79,20 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
        p_address,
        sysdate);
   END add_adopter;
-
+  
   -- manage_adoption_request WORKS
   PROCEDURE manage_adoption_request(p_request_id IN NUMBER,
                                     p_action     IN VARCHAR2) AS
+                                    v_count NUMBER;
   BEGIN
-    IF p_action = 'Approve' THEN
+    SELECT COUNT(*)
+      INTO v_count
+      FROM adoption_requests
+     WHERE request_id = p_request_id;
+  
+    IF v_count = 0 THEN
+      RAISE_APPLICATION_ERROR(-20016, 'ID not valid');
+    ELSIF p_action = 'Approve' THEN
       UPDATE adoption_requests
          SET status = 'Approved'
        WHERE request_id = p_request_id;
@@ -92,8 +100,24 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
       UPDATE adoption_requests
          SET status = 'Rejected'
        WHERE request_id = p_request_id;
+    ELSE
+      RAISE_APPLICATION_ERROR(-20017, 'Invalid action specified.');
     END IF;
+    COMMIT;
+  
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+      RAISE_APPLICATION_ERROR(-20018,
+                              'No adoption request found with the given ID');
+    WHEN OTHERS THEN
+      ROLLBACK;
+      pkg_log.log_error(p_message => 'An error occurred' || SQLERRM,
+                        p_api     => 'manage_adoption_request');
+      RAISE_APPLICATION_ERROR(-20019,
+                              'An error occurred while processing the request');
+    
   END manage_adoption_request;
+
 
   -- fn_is_pet_available WORK
   FUNCTION fn_is_pet_available(p_pet_id IN NUMBER) RETURN VARCHAR2 AS
