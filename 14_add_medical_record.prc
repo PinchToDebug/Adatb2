@@ -28,8 +28,6 @@ BEGIN
                       p_api     => 'add_medical_record');
     RAISE_APPLICATION_ERROR(-20005, 'Veterinarian ID cannot be null');
   END IF;
-  IF p_treatment_type != 
-
 
   BEGIN
     INSERT INTO medical_history
@@ -45,7 +43,7 @@ BEGIN
        p_pet_id,
        sysdate,
        p_treatment_type,
-       p_treatment_id,
+       upper(p_treatment_id),
        p_notes,
        p_veterinarian_id);
     COMMIT;
