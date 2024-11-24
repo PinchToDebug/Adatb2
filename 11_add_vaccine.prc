@@ -1,7 +1,7 @@
 CREATE OR REPLACE PROCEDURE add_vaccine(p_v_name IN VARCHAR2,
-                                           p_v_desc IN VARCHAR2) AS
+                                        p_v_desc IN VARCHAR2) AS
 BEGIN
-   IF p_v_name IS NULL THEN
+  IF p_v_name IS NULL THEN
     pkg_log.log_error(p_message => 'Vaccine name cannot be null',
                       p_api     => 'add_vaccine');
     RAISE_APPLICATION_ERROR(-20010, 'Vaccine name cannot be null');
@@ -17,7 +17,7 @@ BEGIN
     WHEN OTHERS THEN
       ROLLBACK;
       pkg_log.log_error(p_message => 'Error while adding a new vaccine',
-                                     p_api => 'add_vaccine');
+                        p_api     => 'add_vaccine');
       RAISE;
   END;
 END add_vaccine;
