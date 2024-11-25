@@ -12,8 +12,8 @@ BEGIN
      WHERE surgery_id = :NEW.treatment_id;
   
     IF v_exists_in_surgeries = 0 THEN
-       pkg_log.log_error(p_message => 'Treatment ID does not exist in the surgeries table for Surgery type',
-                         p_api     => 'add_medical_record');
+      pkg_log.log_error(p_message => 'Treatment ID does not exist in the surgeries table for Surgery type',
+                        p_api     => 'add_medical_record');
       RAISE_APPLICATION_ERROR(-20014,
                               'Treatment ID does not exist in the surgeries table for Surgery type');
     END IF;
@@ -26,8 +26,8 @@ BEGIN
      WHERE vaccine_id = :NEW.treatment_id;
   
     IF v_exists_in_vaccines = 0 THEN
-             pkg_log.log_error(p_message => 'Treatment ID does not exist in the vaccines table for Vaccine type',
-                               p_api     => 'add_medical_record');
+      pkg_log.log_error(p_message => 'Treatment ID does not exist in the vaccines table for Vaccine type',
+                        p_api     => 'add_medical_record');
       RAISE_APPLICATION_ERROR(-20015,
                               'Treatment ID does not exist in the vaccines table for Vaccine type');
     END IF;
