@@ -4,10 +4,7 @@
   <a href="#"><img src="https://img.shields.io/github/repo-size/pinchtodebug/adatb2"></a>
 </p>
 
-![Database Schema](https://github.com/user-attachments/assets/c2720435-684b-4437-95fb-6d4b1c07c977)
-
-
-
+![Database Schema](https://github.com/user-attachments/assets/b75b4ccd-ba2a-4817-b3cb-9dd0e14798bc)
 
 
 
