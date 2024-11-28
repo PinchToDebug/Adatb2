@@ -87,8 +87,7 @@ This package contains procedures for logging errors in the system.
 ---
 ### [Tests for procedures and functions](https://github.com/PinchToDebug/Adatb2/tree/main/tests)
 ---
-<h3 name="important">⚠️ Important</h3> 
-
-The file names are in the order in which they should be executed, including the test files.<br>
-After executing [01_setup_user.sql](https://github.com/PinchToDebug/Adatb2/blob/main/01_setup_user.sql) make sure to log in as **@pet_shelter** with the password: **"12345678"**.
+> [!IMPORTANT]  <p name="important"></p> 
+>The file names are in the order in which they should be executed, including the test files.<br>
+>After executing [01_setup_user.sql](https://github.com/PinchToDebug/Adatb2/blob/main/01_setup_user.sql) make sure to log in as **@pet_shelter** with the password: **"12345678"**.
 
