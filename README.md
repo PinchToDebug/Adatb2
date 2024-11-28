@@ -9,7 +9,7 @@
 
 
 ## Overview
-This project is a **Pet Shelter Management System**, it includes functionality for managing pets, adopters, medical history, and adoption requests, implemented using Oracle PL/SQL.
+This project is a **Pet Shelter Management System**, it includes functionality for managing pets, adopters, medical history, and adoption requests, implemented using Oracle PL/SQL. <br>
 
 The project includes:
 - **Tables** to store data related to pets, adopters, medical records, treatments, and adoption requests and logs.
@@ -17,7 +17,11 @@ The project includes:
 - **Functions** for checking pet availability, adoption request status, adopter contact information.
 - **Views** for pet details, availibility, pending adoption requests and statistics, medical history and statistics.
 - **Triggers** to enforce business rules.
-- **Error handling** and logging pet table changes.
+- **Error handling** and logging pet table changes.  
+
+Make sure to read [**important**](#important)!
+
+
 ---
 ### [Tables](https://github.com/PinchToDebug/Adatb2/blob/main/02_init_tables.sql)
    - `pets` stores pet details.
@@ -83,6 +87,7 @@ This package contains procedures for logging errors in the system.
 ---
 ### [Tests for procedures and functions](https://github.com/PinchToDebug/Adatb2/tree/main/tests)
 ---
-### ⚠️ Important
+<h3 name="important">⚠️ Important</h3> 
+
 The file names are in the order in which they should be executed, including the test files.<br>
 After executing [01_setup_user.sql](https://github.com/PinchToDebug/Adatb2/blob/main/01_setup_user.sql) make sure to log in as @pet_shelter with the password: "12345678".
