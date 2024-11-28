@@ -83,5 +83,9 @@ This package contains procedures for logging errors in the system.
 - [`trg_validate_treatment_id`](https://github.com/PinchToDebug/Adatb2/blob/main/15_tr_treatment_id_check.trg) Validates the `treatment_id` in the `medical_history` table to ensure it exists in either the `vaccines` or `surgeries` tables before an insert or update.
 - [`trg_validate_veterinarian_id`](https://github.com/PinchToDebug/Adatb2/blob/main/16_tr_valid_vet_id.trg) Ensures the `veterinarian_id` in the `medical_history` table exists in the `veterinarians` table before an insert or update.
 - [`trg_validate_treatment_id`](https://github.com/PinchToDebug/Adatb2/blob/main/17_tr_valid_treatment_id.trg) Validates the `treatment_id` in the `medical_history` table based on `treatment_type`. Ensures that for 'SURGERY' types, the `treatment_id` exists in the `surgeries` table, and for 'VACCINE' types, it exists in the `vaccines` table. Logs errors if validation fails.
-
-
+---
+### [Tests for procedures and functions](https://github.com/PinchToDebug/Adatb2/tree/main/tests)
+---
+### ⚠️ Important
+The file names are in the order in which they should be executed, including the test files.<br>
+After executing [01_setup_user.sql](https://github.com/PinchToDebug/Adatb2/blob/main/01_setup_user.sql) make sure to log in as @pet_shelter with the password: "12345678".
