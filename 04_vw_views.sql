@@ -60,7 +60,7 @@ SELECT COUNT(*) AS total_requests,
 
 
 -- MEDICAL HISTORY STATISTICS VIEW --
-CREATE OR REPLACE VIEW vw_pets_medical_history AS
+CREATE OR REPLACE VIEW vw_pets_medical_history_stats AS
 SELECT mh.pet_id,
        p.pet_name,
        mh.treatment_type,
