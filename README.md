@@ -1,7 +1,15 @@
 <h1 align="center">Databases 2 Assignment<br>Pet Shelter</h1>
-
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/github/last-commit/pinchtodebug/adatb2" ></a>
+  <a href="#"><img src="https://img.shields.io/github/repo-size/pinchtodebug/adatb2"></a>
+</p>
 
 ![Database Schema](https://github.com/user-attachments/assets/c2720435-684b-4437-95fb-6d4b1c07c977)
+
+
+
+
+
 
 ## Overview
 This project is a **Pet Shelter Management System**, it includes functionality for managing pets, adopters, medical history, and adoption requests, implemented using Oracle PL/SQL.
@@ -14,7 +22,7 @@ The project includes:
 - **Triggers** to enforce business rules.
 - **Error handling** and logging pet table changes.
 ---
-### Tables
+### [Tables](https://github.com/PinchToDebug/Adatb2/blob/main/02_init_tables.sql)
    - `pets` stores pet details.
    - `adoption_requests` stores adoption requests.
    - `adopters` Stores adopter details.
@@ -25,7 +33,7 @@ The project includes:
    - `pet_log` stores changes to pets in `pets` table.
    - `log` stores occured errors.
 ---
-### Views
+### [Views](https://github.com/PinchToDebug/Adatb2/blob/main/04_vw_views.s]ql)
    - `vw_pets` View of the `pets` table.
    - `vw_pending_adoption_requests` View for pending adoption requests.
    - `vw_pets_available` View for pets that are available for adoption.
@@ -33,7 +41,7 @@ The project includes:
    - `vw_pets_medical_history ` View of medical history including the veterinarian.
    - `vw_pets_medical_history_stats ` Trimmed view for `medical_history` with the pet's name.
 ---
-### adoption_pck package [🔗](docs/adoption_pck.md)
+### [adoption_pck package](https://github.com/PinchToDebug/Adatb2/blob/main/06_pkg_adoption_package.pkg)
 This package contains procedures and functions for managing adoption-related operations.
 
 - **Procedures**:
@@ -47,7 +55,7 @@ This package contains procedures and functions for managing adoption-related ope
   - `fn_get_adopter_info`: Returns information about a specific adopter based on `adopter_id` ("name: | email: | phone: ").
   - `fn_get_request_status`: Returns the status of an adoption request based on `request_id`.
 ---
-### pkg_log package
+### [pkg_log package](https://github.com/PinchToDebug/Adatb2/blob/main/05_pkg_log.pkg)
 This package contains procedures for logging errors in the system.
 
 - **Procedures**:
@@ -62,18 +70,18 @@ This package contains procedures for logging errors in the system.
     - `backtrace` The backtrace of the error.
 ---
 ### Procedures
-- `add_vaccine` Adds a new vaccine to the `vaccines` table.
-- `add_surgery` Adds a new surgery to the `surgeries` table.
-- `add_medical_record` Adds a medical record to the `medical_history` table.
-- `add_veterinarian` Adds a veterinarian to the `veterinarians` table.
+- [`add_vaccine`](https://github.com/PinchToDebug/Adatb2/blob/main/11_add_vaccine.prc) Adds a new vaccine to the `vaccines` table.
+- [`add_surgery`](https://github.com/PinchToDebug/Adatb2/blob/main/12_add_surgery.prc) Adds a new surgery to the `surgeries` table.
+- [`add_medical_record`](https://github.com/PinchToDebug/Adatb2/blob/main/14_add_medical_record.prc) Adds a medical record to the `medical_history` table.
+- [`add_veterinarian`](https://github.com/PinchToDebug/Adatb2/blob/main/14_add_veterinarian.prc) Adds a veterinarian to the `veterinarians` table.
 ---
 ### Triggers
-- `trg_update_pet_status` Updates the pet's status to 'Pending' in the `pets` table after an adoption request is inserted.
-- `trg_log_pet_changes` Logs changes to the `pets` table (INSERT, UPDATE, DELETE) into the `pet_log` table.
-- `trg_update_pet_on_reject` Updates a pet's status to 'Available' in the `pets` table if an adoption request is updated to 'Rejected'.
-- `trg_prevent_pending_adoption` Prevents a new adoption request from being inserted if there is already a pending request for the same pet.
-- `trg_validate_treatment_id`: Validates the `treatment_id` in the `medical_history` table to ensure it exists in either the `vaccines` or `surgeries` tables before an insert or update.
-- `trg_validate_veterinarian_id`: Ensures the `veterinarian_id` in the `medical_history` table exists in the `veterinarians` table before an insert or update.
-- `trg_validate_treatment_id`: Validates the `treatment_id` in the `medical_history` table based on `treatment_type`. Ensures that for 'SURGERY' types, the `treatment_id` exists in the `surgeries` table, and for 'VACCINE' types, it exists in the `vaccines` table. Logs errors if validation fails.
+- [`trg_update_pet_status`](https://github.com/PinchToDebug/Adatb2/blob/main/07_tr_update_pet_status.trg) Updates the pet's status to 'Pending' in the `pets` table after an adoption request is inserted.
+- [`trg_log_pet_changes`](https://github.com/PinchToDebug/Adatb2/blob/main/08_tr_log_pet_changes.trg) Logs changes to the `pets` table (INSERT, UPDATE, DELETE) into the `pet_log` table.
+- [`trg_update_pet_on_reject`](https://github.com/PinchToDebug/Adatb2/blob/main/08_tr_update_pet_status_on_reject.trg) Updates a pet's status to 'Available' in the `pets` table if an adoption request is updated to 'Rejected'.
+- [`trg_prevent_pending_adoption`](https://github.com/PinchToDebug/Adatb2/blob/main/10_tr_prevent_pending_adoption.trg) Prevents a new adoption request from being inserted if there is already a pending request for the same pet.
+- [`trg_validate_treatment_id`](https://github.com/PinchToDebug/Adatb2/blob/main/15_tr_treatment_id_check.trg) Validates the `treatment_id` in the `medical_history` table to ensure it exists in either the `vaccines` or `surgeries` tables before an insert or update.
+- [`trg_validate_veterinarian_id`](https://github.com/PinchToDebug/Adatb2/blob/main/16_tr_valid_vet_id.trg) Ensures the `veterinarian_id` in the `medical_history` table exists in the `veterinarians` table before an insert or update.
+- [`trg_validate_treatment_id`](https://github.com/PinchToDebug/Adatb2/blob/main/17_tr_valid_treatment_id.trg) Validates the `treatment_id` in the `medical_history` table based on `treatment_type`. Ensures that for 'SURGERY' types, the `treatment_id` exists in the `surgeries` table, and for 'VACCINE' types, it exists in the `vaccines` table. Logs errors if validation fails.
 
 
