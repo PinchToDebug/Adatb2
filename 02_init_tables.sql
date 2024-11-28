@@ -52,7 +52,7 @@ ALTER TABLE adoption_requests ADD CONSTRAINT fk_adopter_id
       FOREIGN KEY(adopter_id) REFERENCES adopters(adopter_id);
 
 
--- VACCINES TABLE 
+-- VACCINES TABLE --
 CREATE TABLE vaccines (
     vaccine_id VARCHAR2(15)   PRIMARY KEY,
     v_name VARCHAR2(150 CHAR) NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE vaccines (
 TABLESPACE users;
 
 
--- SURGERIES TABLE
+-- SURGERIES TABLE --
 CREATE TABLE surgeries (
     surgery_id VARCHAR2(15)   PRIMARY KEY,
     s_name VARCHAR2(150 CHAR) NOT NULL,
@@ -85,7 +85,7 @@ TABLESPACE users;
 COMMENT ON COLUMN medical_history.treatment_type  IS 'Vaccination / Surgery';
 
 
--- VETERANIANS TABLE -- 
+-- VETERINARIANS TABLE -- 
 CREATE TABLE veterinarians(
     veterinarian_id NUMBER PRIMARY KEY,
     first_name VARCHAR2(100 CHAR) NOT NULL,
