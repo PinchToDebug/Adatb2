@@ -1,0 +1,4 @@
+*.tst linguist-language=PLSQL
+*.prc linguist-language=PLSQL
+*.trg linguist-language=PLSQL
+*.pkg linguist-language=PLSQL
