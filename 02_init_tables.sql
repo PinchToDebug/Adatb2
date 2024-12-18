@@ -72,13 +72,22 @@ TABLESPACE users;
 
 -- MEDICAL_HISTORY TABLE -- 
 CREATE TABLE medical_history(
-    record_id NUMBER PRIMARY KEY,
-    pet_id    NUMBER NOT NULL,
-    treatment_date DATE DEFAULT SYSDATE,
+    record_id      NUMBER  PRIMARY KEY,
+    pet_id         NUMBER  NOT NULL,
+    treatment_date DATE    DEFAULT SYSDATE,
     treatment_type VARCHAR2(12 CHAR) NOT NULL, -- Vaccination / Surgery
-    treatment_id   VARCHAR2(12 CHAR) NOT NULL,
+    vaccine_id     VARCHAR2(15),
+    surgery_id     VARCHAR2(15),
     notes VARCHAR2(300 CHAR),
-    veterinarian_id NUMBER
+    veterinarian_id NUMBER,
+    CONSTRAINT fk_pet FOREIGN KEY (pet_id) REFERENCES pet(pet_id),         
+    CONSTRAINT fk_vaccine FOREIGN KEY (vaccine_id) REFERENCES vaccine(vaccine_id),
+    CONSTRAINT fk_surgery FOREIGN KEY (surgery_id) REFERENCES surgery(surgery_id),
+    CONSTRAINT fk_vet FOREIGN KEY (veterinarian_id) REFERENCES veterinarian(veterinarian_id),
+    CONSTRAINT chk_treatment_type CHECK (
+        (treatment_type = 'Vaccination' AND vaccine_id IS NOT NULL AND surgery_id IS NULL) OR
+        (treatment_type = 'Surgery' AND surgery_id IS NOT NULL AND vaccine_id IS NULL)
+    ) 
 )
 TABLESPACE users;
 
