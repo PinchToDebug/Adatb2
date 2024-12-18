@@ -69,16 +69,14 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
                         p_address    IN VARCHAR2) AS
   BEGIN
     INSERT INTO adopter
-      (adopter_id,
-       first_name,
+      (first_name,
        last_name,
        email,
        phone,
        address,
        application_date)
     VALUES
-      (seq_adopter_id.nextval,
-       p_first_name,
+      (p_first_name,
        p_last_name,
        p_email,
        p_phone,
@@ -181,8 +179,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
                     p_notes    IN VARCHAR2) AS
   BEGIN
     INSERT INTO pet
-      (pet_id,
-       pet_name,
+      (pet_name,
        species,
        color,
        breed,
@@ -192,8 +189,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
        notes,
        version)
     VALUES
-      (seq_pet_id.nextval,
-       p_pet_name,
+      (p_pet_name,
        p_species,
        p_color,
        p_breed,
