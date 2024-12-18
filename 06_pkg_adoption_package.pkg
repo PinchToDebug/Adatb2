@@ -50,10 +50,9 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
                            p_notes      IN VARCHAR2) AS
   BEGIN
     INSERT INTO adoption_request
-      (request_id, pet_id, adopter_id, status, requested_at, notes)
+      (pet_id, adopter_id, status, requested_at, notes)
     VALUES
-      (seq_request_id.nextval,
-       p_pet_id,
+      (p_pet_id,
        p_adopter_id,
        'Pending',
        sysdate,
