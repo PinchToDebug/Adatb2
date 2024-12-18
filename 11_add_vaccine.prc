@@ -7,7 +7,7 @@ BEGIN
     RAISE_APPLICATION_ERROR(-20010, 'Vaccine name cannot be null');
   END IF;
   BEGIN
-    INSERT INTO vaccines
+    INSERT INTO vaccine
       (vaccine_id, v_name, v_desc)
     VALUES
       (('V' || LPAD(seq_vaccine_id.nextval, 4, '0')), p_v_name, p_v_desc);

@@ -1,5 +1,5 @@
--- PETS TABLE -- 
-CREATE TABLE pets(
+-- pet TABLE -- 
+CREATE TABLE pet(
     pet_id   NUMBER PRIMARY KEY,
     pet_name VARCHAR2(100 CHAR) NOT NULL,
     species  VARCHAR2(50 CHAR)  NOT NULL,
@@ -14,13 +14,13 @@ CREATE TABLE pets(
 )
 TABLESPACE users;
 
-COMMENT ON COLUMN pets.weight IS 'Pets weight in kilogram.';
-COMMENT ON COLUMN pets.status IS 'Status of the pet. (Available / Adopted / Fostered)';
-COMMENT ON COLUMN pets.notes  IS 'Description and other information of the pet.';
+COMMENT ON COLUMN pet.weight IS 'pet weight in kilogram.';
+COMMENT ON COLUMN pet.status IS 'Status of the pet. (Available / Adopted / Fostered)';
+COMMENT ON COLUMN pet.notes  IS 'Description and other information of the pet.';
 
 
 -- ADOPTION_REQUEST TABLE -- 
-CREATE TABLE adoption_requests(
+CREATE TABLE adoption_request(
     request_id NUMBER PRIMARY KEY,
     pet_id     NUMBER NOT NULL,
     adopter_id NUMBER NOT NULL,
@@ -30,14 +30,14 @@ CREATE TABLE adoption_requests(
 )
 TABLESPACE users;
 
-COMMENT ON COLUMN adoption_requests.status  IS 'Status of the request. (Pending / Approved / Rejected)';
+COMMENT ON COLUMN adoption_request.status  IS 'Status of the request. (Pending / Approved / Rejected)';
 
-ALTER TABLE adoption_requests ADD CONSTRAINT fk_pet_id
-      FOREIGN KEY(pet_id) REFERENCES pets(pet_id);
+ALTER TABLE adoption_request ADD CONSTRAINT fk_pet_id
+      FOREIGN KEY(pet_id) REFERENCES pet(pet_id);
 
 
--- ADOPTERS TABLE -- 
-CREATE TABLE adopters(
+-- adopter TABLE -- 
+CREATE TABLE adopter(
     adopter_id NUMBER PRIMARY KEY,
     first_name VARCHAR2(100 CHAR) NOT NULL,
     last_name  VARCHAR2(100 CHAR) NOT NULL,
@@ -48,12 +48,12 @@ CREATE TABLE adopters(
 )
 TABLESPACE users;
 
-ALTER TABLE adoption_requests ADD CONSTRAINT fk_adopter_id
-      FOREIGN KEY(adopter_id) REFERENCES adopters(adopter_id);
+ALTER TABLE adoption_request ADD CONSTRAINT fk_adopter_id
+      FOREIGN KEY(adopter_id) REFERENCES adopter(adopter_id);
 
 
--- VACCINES TABLE --
-CREATE TABLE vaccines (
+-- vaccine TABLE --
+CREATE TABLE vaccine (
     vaccine_id VARCHAR2(15)   PRIMARY KEY,
     v_name VARCHAR2(150 CHAR) NOT NULL,
     v_desc VARCHAR2(150 CHAR)
@@ -61,8 +61,8 @@ CREATE TABLE vaccines (
 TABLESPACE users;
 
 
--- SURGERIES TABLE --
-CREATE TABLE surgeries (
+-- surgery TABLE --
+CREATE TABLE surgery (
     surgery_id VARCHAR2(15)   PRIMARY KEY,
     s_name VARCHAR2(150 CHAR) NOT NULL,
     s_desc VARCHAR2(150 CHAR)
@@ -85,8 +85,8 @@ TABLESPACE users;
 COMMENT ON COLUMN medical_history.treatment_type  IS 'Vaccination / Surgery';
 
 
--- VETERINARIANS TABLE -- 
-CREATE TABLE veterinarians(
+-- veterinarian TABLE -- 
+CREATE TABLE veterinarian(
     veterinarian_id NUMBER PRIMARY KEY,
     first_name VARCHAR2(100 CHAR) NOT NULL,
     last_name  VARCHAR2(100 CHAR) NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE veterinarians(
 TABLESPACE users;
 
 ALTER TABLE medical_history ADD CONSTRAINT fk_veterinarian_id
-      FOREIGN KEY(veterinarian_id) REFERENCES veterinarians(veterinarian_id);
+      FOREIGN KEY(veterinarian_id) REFERENCES veterinarian(veterinarian_id);
 
 
 -- PET_LOG TABLE --

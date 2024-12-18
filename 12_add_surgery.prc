@@ -7,7 +7,7 @@ BEGIN
     RAISE_APPLICATION_ERROR(-20011, 'Surgery name cannot be null');
   END IF;
   BEGIN
-    INSERT INTO surgeries
+    INSERT INTO surgery
       (surgery_id, s_name, s_desc)
     VALUES
       (('S' || LPAD(seq_surgery_id.nextval, 4, '0')), p_s_name, p_s_desc);

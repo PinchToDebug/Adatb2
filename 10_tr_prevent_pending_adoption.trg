@@ -1,12 +1,12 @@
 CREATE OR REPLACE TRIGGER trg_prevent_pending_adoption
-BEFORE INSERT ON adoption_requests
+BEFORE INSERT ON adoption_request
 FOR EACH ROW
 DECLARE
   v_count NUMBER;
 BEGIN
   SELECT COUNT(*)
     INTO v_count
-    FROM adoption_requests
+    FROM adoption_request
    WHERE pet_id = :NEW.pet_id
      AND status = 'Pending';
 

@@ -1,27 +1,27 @@
--- PETS VW --
-CREATE OR REPLACE VIEW wv_pets AS
+-- pet VW --
+CREATE OR REPLACE VIEW wv_pet AS
 SELECT pet_id, pet_name, species, color, breed, age, weight, status
-  FROM pets;
+  FROM pet;
 
 
 -- PENDING ADOPTION VW --
-CREATE OR REPLACE VIEW vw_pending_adoption_requests AS
+CREATE OR REPLACE VIEW vw_pending_adoption_request AS
 SELECT ar.request_id,
        ar.requested_at,
        p.pet_name,
        a.first_name || ' ' || a.last_name AS adopter_name
-  FROM adoption_requests ar
-  JOIN pets p
+  FROM adoption_request ar
+  JOIN pet p
     ON ar.pet_id = p.pet_id
-  JOIN adopters a
+  JOIN adopter a
     ON ar.adopter_id = a.adopter_id
  WHERE ar.status = 'Pending';
 
 
 -- AVAILABLE ADOPTION VIEW --
-CREATE OR REPLACE VIEW vw_pets_available AS
+CREATE OR REPLACE VIEW vw_pet_available AS
 SELECT pet_id, pet_name, species, color, breed, age, weight, status
-  FROM pets
+  FROM pet
  WHERE status = 'Available';
  
  
@@ -35,9 +35,9 @@ SELECT mh.record_id,
        mh.notes AS notes,
        v.first_name || ' ' || v.last_name AS veterinarian_name
   FROM medical_history mh
-  JOIN pets p
+  JOIN pet p
     ON mh.pet_id = p.pet_id
-  LEFT JOIN veterinarians v
+  LEFT JOIN veterinarian v
     ON mh.veterinarian_id = v.veterinarian_id;
 
 
@@ -56,18 +56,18 @@ SELECT COUNT(*) AS total_requests,
                WHEN status = 'Pending' THEN
                 1
              END) AS pending_requests
-  FROM adoption_requests;
+  FROM adoption_request;
 
 
 -- MEDICAL HISTORY STATISTICS VIEW --
-CREATE OR REPLACE VIEW vw_pets_medical_history_stats AS
+CREATE OR REPLACE VIEW vw_pet_medical_history_stats AS
 SELECT mh.pet_id,
        p.pet_name,
        mh.treatment_type,
        mh.treatment_date,
        mh.notes
   FROM medical_history mh
-  JOIN pets p
+  JOIN pet p
     ON mh.pet_id = p.pet_id
  WHERE mh.treatment_type IS NOT NULL
  ORDER BY mh.treatment_date DESC;

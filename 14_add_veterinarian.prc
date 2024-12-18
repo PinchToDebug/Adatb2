@@ -30,7 +30,7 @@ BEGIN
   END IF;
 
   BEGIN
-    INSERT INTO veterinarians
+    INSERT INTO veterinarian
       (veterinarian_id,
        first_name,
        last_name,

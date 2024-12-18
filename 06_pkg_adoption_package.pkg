@@ -43,7 +43,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
                            p_adopter_id IN NUMBER,
                            p_notes      IN VARCHAR2) AS
   BEGIN
-    INSERT INTO adoption_requests
+    INSERT INTO adoption_request
       (request_id, pet_id, adopter_id, status, requested_at, notes)
     VALUES
       (seq_request_id.nextval,
@@ -62,7 +62,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
                         p_phone      IN VARCHAR2,
                         p_address    IN VARCHAR2) AS
   BEGIN
-    INSERT INTO adopters
+    INSERT INTO adopter
       (adopter_id,
        first_name,
        last_name,
@@ -87,17 +87,17 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
   BEGIN
     SELECT COUNT(*)
       INTO v_count
-      FROM adoption_requests
+      FROM adoption_request
      WHERE request_id = p_request_id;
   
     IF v_count = 0 THEN
       RAISE_APPLICATION_ERROR(-20016, 'ID not valid');
     ELSIF p_action = 'Approve' THEN
-      UPDATE adoption_requests
+      UPDATE adoption_request
          SET status = 'Approved'
        WHERE request_id = p_request_id;
     ELSIF p_action = 'Reject' THEN
-      UPDATE adoption_requests
+      UPDATE adoption_request
          SET status = 'Rejected'
        WHERE request_id = p_request_id;
     ELSE
@@ -123,7 +123,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
   FUNCTION fn_is_pet_available(fn_pet_id IN NUMBER) RETURN VARCHAR2 AS
     v_status VARCHAR2(10);
   BEGIN
-    SELECT status INTO v_status FROM pets WHERE pet_id = fn_pet_id;
+    SELECT status INTO v_status FROM pet WHERE pet_id = fn_pet_id;
     IF v_status = 'Available' THEN
       RETURN 'Yes';
     ELSE
@@ -142,7 +142,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
   BEGIN
     SELECT first_name || ' ' || last_name, email, phone
       INTO v_name, v_email, v_phone
-      FROM adopters
+      FROM adopter
      WHERE adopter_id = fn_adopter_id;
     RETURN 'name: ' || v_name || ' | email: ' || v_email || ' | phone: ' || v_phone;
   
@@ -157,7 +157,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
   BEGIN
     SELECT status
       INTO v_status
-      FROM adoption_requests
+      FROM adoption_request
      WHERE request_id = fn_request_id;
     RETURN v_status;
   EXCEPTION
@@ -174,7 +174,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
                     p_weight   IN NUMBER,
                     p_notes    IN VARCHAR2) AS
   BEGIN
-    INSERT INTO pets
+    INSERT INTO pet
       (pet_id,
        pet_name,
        species,
