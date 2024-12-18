@@ -230,7 +230,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
       RAISE_APPLICATION_ERROR(-20005, 'Veterinarian ID cannot be null');
     END IF;
   BEGIN
-    IF p_treatment_type = 'Vaccination' THEN
+    IF upper(p_treatment_type) = 'VACCINATION' THEN
       INSERT INTO medical_history
         (pet_id,
          treatment_date,
@@ -246,7 +246,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
          p_notes,
          p_veterinarian_id);
 
-    ELSIF p_treatment_type = 'Surgery' THEN
+    ELSIF upper(p_treatment_type) = 'SURGERY' THEN
       INSERT INTO medical_history
         (pet_id,
          treatment_date,

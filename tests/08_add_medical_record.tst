@@ -2,7 +2,7 @@ PL/SQL Developer Test script 3.0
 13
 begin
   -- veterinarian_id seq starts at 100,
-  -- p_treatment_type Surgery / Vaccine
+  -- p_treatment_type Surgery / Vaccination
   -- p_treatment_id must match the types
   adoption_pck.add_medical_record(p_pet_id          => :p_pet_id,
                      p_treatment_type  => :p_treatment_type,
@@ -16,7 +16,7 @@ end;
 6
 p_pet_id
 1
-1000
+1001
 5
 p_treatment_type
 1
