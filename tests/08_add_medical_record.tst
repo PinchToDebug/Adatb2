@@ -4,7 +4,7 @@ begin
   -- veterinarian_id seq starts at 100,
   -- p_treatment_type Surgery / Vaccine
   -- p_treatment_id must match the types
-  add_medical_record(p_pet_id          => :p_pet_id,
+  adoption_pck.add_medical_record(p_pet_id          => :p_pet_id,
                      p_treatment_type  => :p_treatment_type,
                      p_treatment_id    => :p_treatment_id,
                      p_notes           => :p_notes,
