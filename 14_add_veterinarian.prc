@@ -53,5 +53,5 @@ BEGIN
                         p_api     => 'add_veterinarian');
       RAISE;
   END;
-END;
+END add_veterinarian;
 /
