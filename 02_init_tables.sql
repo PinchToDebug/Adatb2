@@ -70,6 +70,19 @@ CREATE TABLE surgery (
 TABLESPACE users;
 
 
+-- veterinarian TABLE -- 
+CREATE TABLE veterinarian(
+    veterinarian_id NUMBER PRIMARY KEY,
+    first_name VARCHAR2(100 CHAR) NOT NULL,
+    last_name  VARCHAR2(100 CHAR) NOT NULL,
+    phone  VARCHAR2(12 CHAR),
+    email  VARCHAR2(100 CHAR),
+    specialization VARCHAR2(150)
+)
+TABLESPACE users;
+
+
+
 -- MEDICAL_HISTORY TABLE -- 
 CREATE TABLE medical_history(
     record_id      NUMBER  PRIMARY KEY,
@@ -92,21 +105,6 @@ CREATE TABLE medical_history(
 TABLESPACE users;
 
 COMMENT ON COLUMN medical_history.treatment_type  IS 'Vaccination / Surgery';
-
-
--- veterinarian TABLE -- 
-CREATE TABLE veterinarian(
-    veterinarian_id NUMBER PRIMARY KEY,
-    first_name VARCHAR2(100 CHAR) NOT NULL,
-    last_name  VARCHAR2(100 CHAR) NOT NULL,
-    phone  VARCHAR2(12 CHAR),
-    email  VARCHAR2(100 CHAR),
-    specialization VARCHAR2(150)
-)
-TABLESPACE users;
-
-ALTER TABLE medical_history ADD CONSTRAINT fk_veterinarian_id
-      FOREIGN KEY(veterinarian_id) REFERENCES veterinarian(veterinarian_id);
 
 
 -- PET_LOG TABLE --
