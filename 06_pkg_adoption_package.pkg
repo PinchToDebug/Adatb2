@@ -229,7 +229,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
                         p_api     => 'add_medical_record');
       RAISE_APPLICATION_ERROR(-20005, 'Veterinarian ID cannot be null');
     END IF;
-  BEGIN
+
     IF upper(p_treatment_type) = 'VACCINATION' THEN
       INSERT INTO medical_history
         (pet_id,
@@ -241,7 +241,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
       VALUES
         (p_pet_id,
          SYSDATE,
-         p_treatment_type,
+         upper(p_treatment_type),
          upper(p_treatment_id),
          p_notes,
          p_veterinarian_id);
@@ -257,7 +257,7 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
       VALUES
         (p_pet_id,
          SYSDATE,
-         p_treatment_type,
+         upper(p_treatment_type),
          upper(p_treatment_id),
          p_notes,
          p_veterinarian_id);
@@ -270,21 +270,8 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
 
     COMMIT;
     
-    EXCEPTION
-      WHEN OTHERS THEN
-        ROLLBACK;
-          IF SQLCODE = -2291 THEN
-               pkg_log.log_error(p_message => 'Invalid Veterinarian ID.',
-                                 p_api     => 'add_medical_record');
-               RAISE_APPLICATION_ERROR(-20025, 'Invalid Veterinarian ID: Record does not exist.');
-          ELSE
-              pkg_log.log_error(p_message => 'Error while adding medical record',
-                                p_api     => 'add_medical_record');
-              RAISE_APPLICATION_ERROR(-20026, 'Error while adding medical record.');
-          END IF;
-      
-        RAISE;
-    END;
+    
+
   END add_medical_record;
   
 END adoption_pck;
