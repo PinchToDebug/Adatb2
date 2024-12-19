@@ -82,7 +82,6 @@ CREATE TABLE veterinarian(
 TABLESPACE users;
 
 
-
 -- MEDICAL_HISTORY TABLE -- 
 CREATE TABLE medical_history(
     record_id      NUMBER  PRIMARY KEY,
@@ -98,8 +97,8 @@ CREATE TABLE medical_history(
     CONSTRAINT fk_surgery FOREIGN KEY (surgery_id) REFERENCES surgery(surgery_id),
     CONSTRAINT fk_vet FOREIGN KEY (veterinarian_id) REFERENCES veterinarian(veterinarian_id),
     CONSTRAINT chk_treatment_type CHECK (
-        (treatment_type = 'Vaccination' AND vaccine_id IS NOT NULL AND surgery_id IS NULL) OR
-        (treatment_type = 'Surgery' AND surgery_id IS NOT NULL AND vaccine_id IS NULL)
+        (upper(treatment_type) = 'VACCINATION' AND vaccine_id IS NOT NULL AND surgery_id IS NULL) OR
+        (upper(treatment_type) = 'SURGERY' AND surgery_id IS NOT NULL AND vaccine_id IS NULL)
     ) 
 )
 TABLESPACE users;
