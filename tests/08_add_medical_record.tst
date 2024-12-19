@@ -5,10 +5,10 @@ begin
   -- p_treatment_type Surgery / Vaccination
   -- p_treatment_id must match the types
   adoption_pck.add_medical_record(p_pet_id          => :p_pet_id,
-                     p_treatment_type  => :p_treatment_type,
-                     p_treatment_id    => :p_treatment_id,
-                     p_notes           => :p_notes,
-                     p_veterinarian_id => :p_veterinarian_id);
+                                  p_treatment_type  => :p_treatment_type,
+                                  p_treatment_id    => :p_treatment_id,
+                                  p_notes           => :p_notes,
+                                  p_veterinarian_id => :p_veterinarian_id);
 
   DBMS_OUTPUT.PUT_LINE(TO_CHAR(SYSDATE, 'HH24:MI:SS ') ||
                        'Medical record added');
