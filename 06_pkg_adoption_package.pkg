@@ -81,6 +81,8 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
        p_phone,
        p_address,
        sysdate);
+
+	COMMIT;   
   END add_adopter;
   
   -- manage_adoption_request WORKS
@@ -196,7 +198,9 @@ CREATE OR REPLACE PACKAGE BODY adoption_pck AS
        p_weight,
        'Available',
        p_notes,
-       1); commit;
+       1); 
+
+	   commit;
   END add_pet;
 
   PROCEDURE add_medical_record(p_pet_id          NUMBER,
