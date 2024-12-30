@@ -15,8 +15,10 @@ The project includes:
 - **Triggers** to enforce business rules.
 - **Error handling** and logging pet table changes.  
 
-Make sure to read [**important**](#important)!
 
+> [!IMPORTANT]  <p name="important"></p> 
+>The file names are in the order in which they should be executed, including the test files.<br>
+>After executing [01_setup_user.sql](https://github.com/PinchToDebug/Adatb2/blob/main/01_setup_user.sql) make sure to log in as **@pet_shelter** with the password: **"12345678"**.
 
 ---
 ### [Tables](https://github.com/PinchToDebug/Adatb2/blob/main/02_init_tables.sql)
@@ -72,8 +74,4 @@ This package contains procedures for logging errors in the system.
 - [`id_triggers`](https://github.com/PinchToDebug/Adatb2/blob/main/15_id_triggers.sql) Increments ID-s.
 ---
 ### [Tests for procedures and functions](https://github.com/PinchToDebug/Adatb2/tree/main/tests)
----
-> [!IMPORTANT]  <p name="important"></p> 
->The file names are in the order in which they should be executed, including the test files.<br>
->After executing [01_setup_user.sql](https://github.com/PinchToDebug/Adatb2/blob/main/01_setup_user.sql) make sure to log in as **@pet_shelter** with the password: **"12345678"**.
 
