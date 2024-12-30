@@ -1,10 +1,6 @@
 <h1 align="center">Databases 2 Assignment<br>Pet Shelter</h1>
-<p align="center">
-  <a href="#"><img src="https://img.shields.io/github/last-commit/pinchtodebug/adatb2" ></a>
-  <a href="#"><img src="https://img.shields.io/github/repo-size/pinchtodebug/adatb2"></a>
-</p>
 
-![Database Schema](https://github.com/user-attachments/assets/b75b4ccd-ba2a-4817-b3cb-9dd0e14798bc)
+![Database Schema](https://github.com/user-attachments/assets/4a7f095a-0c5c-4a1f-be34-695df5e33769)
 
 
 
@@ -15,12 +11,14 @@ The project includes:
 - **Tables** to store data related to pets, adopters, medical records, treatments, and adoption requests and logs.
 - **Procedures** for adding pets, adopters, adding medical records for pets, surgeries, vaccines, managing adoption requests, logging errors.
 - **Functions** for checking pet availability, adoption request status, adopter contact information.
-- **Views** for pet details, availibility, pending adoption requests and statistics, medical history and statistics.
+- ~~**Views** for pet details, availibility, pending adoption requests and statistics, medical history and statistics.~~
 - **Triggers** to enforce business rules.
 - **Error handling** and logging pet table changes.  
 
-Make sure to read [**important**](#important)!
 
+> [!IMPORTANT]  <p name="important"></p> 
+>The file names are in the order in which they should be executed, including the test files.<br>
+>After executing [01_setup_user.sql](https://github.com/PinchToDebug/Adatb2/blob/main/01_setup_user.sql) make sure to log in as **@pet_shelter** with the password: **"12345678"**.
 
 ---
 ### [Tables](https://github.com/PinchToDebug/Adatb2/blob/main/02_init_tables.sql)
@@ -33,14 +31,6 @@ Make sure to read [**important**](#important)!
    - `veterinarians` stores veterinarian details.
    - `pet_log` stores changes to pets in `pets` table.
    - `log` stores occured errors.
----
-### [Views](https://github.com/PinchToDebug/Adatb2/blob/main/04_vw_views.s]ql)
-   - `vw_pets` View of the `pets` table.
-   - `vw_pending_adoption_requests` View for pending adoption requests.
-   - `vw_pets_available` View for pets that are available for adoption.
-   - `vw_adoption_stats` Statistical view summary of requests grouped by their status and overall count.
-   - `vw_pets_medical_history ` View of medical history including the veterinarian.
-   - `vw_pets_medical_history_stats ` Trimmed view for `medical_history` with the pet's name.
 ---
 ### [adoption_pck package](https://github.com/PinchToDebug/Adatb2/blob/main/06_pkg_adoption_package.pkg)
 This package contains procedures and functions for managing adoption-related operations.
@@ -81,13 +71,7 @@ This package contains procedures for logging errors in the system.
 - [`trg_log_pet_changes`](https://github.com/PinchToDebug/Adatb2/blob/main/08_tr_log_pet_changes.trg) Logs changes to the `pets` table (INSERT, UPDATE, DELETE) into the `pet_log` table.
 - [`trg_update_pet_on_reject`](https://github.com/PinchToDebug/Adatb2/blob/main/08_tr_update_pet_status_on_reject.trg) Updates a pet's status to 'Available' in the `pets` table if an adoption request is updated to 'Rejected'.
 - [`trg_prevent_pending_adoption`](https://github.com/PinchToDebug/Adatb2/blob/main/10_tr_prevent_pending_adoption.trg) Prevents a new adoption request from being inserted if there is already a pending request for the same pet.
-- [`trg_validate_treatment_id`](https://github.com/PinchToDebug/Adatb2/blob/main/15_tr_treatment_id_check.trg) Validates the `treatment_id` in the `medical_history` table to ensure it exists in either the `vaccines` or `surgeries` tables before an insert or update.
-- [`trg_validate_veterinarian_id`](https://github.com/PinchToDebug/Adatb2/blob/main/16_tr_valid_vet_id.trg) Ensures the `veterinarian_id` in the `medical_history` table exists in the `veterinarians` table before an insert or update.
-- [`trg_validate_treatment_id`](https://github.com/PinchToDebug/Adatb2/blob/main/17_tr_valid_treatment_id.trg) Validates the `treatment_id` in the `medical_history` table based on `treatment_type`. Ensures that for 'SURGERY' types, the `treatment_id` exists in the `surgeries` table, and for 'VACCINE' types, it exists in the `vaccines` table. Logs errors if validation fails.
+- [`id_triggers`](https://github.com/PinchToDebug/Adatb2/blob/main/15_id_triggers.sql) Increments ID-s.
 ---
 ### [Tests for procedures and functions](https://github.com/PinchToDebug/Adatb2/tree/main/tests)
----
-> [!IMPORTANT]  <p name="important"></p> 
->The file names are in the order in which they should be executed, including the test files.<br>
->After executing [01_setup_user.sql](https://github.com/PinchToDebug/Adatb2/blob/main/01_setup_user.sql) make sure to log in as **@pet_shelter** with the password: **"12345678"**.
 
