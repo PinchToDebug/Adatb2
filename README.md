@@ -11,7 +11,7 @@ The project includes:
 - **Tables** to store data related to pets, adopters, medical records, treatments, and adoption requests and logs.
 - **Procedures** for adding pets, adopters, adding medical records for pets, surgeries, vaccines, managing adoption requests, logging errors.
 - **Functions** for checking pet availability, adoption request status, adopter contact information.
-- **Views** for pet details, availibility, pending adoption requests and statistics, medical history and statistics.
+- ~~**Views** for pet details, availibility, pending adoption requests and statistics, medical history and statistics.~~
 - **Triggers** to enforce business rules.
 - **Error handling** and logging pet table changes.  
 
