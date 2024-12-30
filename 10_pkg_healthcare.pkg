@@ -1,0 +1,118 @@
+CREATE OR REPLACE PACKAGE healthcare_pgk AS
+  PROCEDURE add_vaccine(p_v_name VARCHAR2, p_v_desc VARCHAR2);
+  PROCEDURE add_surgery(p_s_name VARCHAR2, p_s_desc VARCHAR2);
+  PROCEDURE add_veterinarian(p_first_name VARCHAR2,
+                               p_last_name VARCHAR2,
+                               p_specialization VARCHAR2,
+                               p_phone VARCHAR2,
+                               p_email VARCHAR2);
+END healthcare_pgk;
+/
+CREATE OR REPLACE PACKAGE BODY healthcare_pgk AS
+    PROCEDURE add_vaccine(p_v_name VARCHAR2, p_v_desc VARCHAR2) AS
+    BEGIN
+        IF p_v_name IS NULL THEN
+            pkg_log.log_error(p_message => 'Vaccine name cannot be null',
+                              p_api     => 'add_vaccine');
+            RAISE_APPLICATION_ERROR(-20010, 'Vaccine name cannot be null');
+        END IF;
+        
+        BEGIN
+            INSERT INTO vaccine
+                (vaccine_id, v_name, v_desc)
+            VALUES
+                ('V' || LPAD(seq_vaccine_id.nextval, 4, '0'), p_v_name, p_v_desc);
+            COMMIT;
+        
+        EXCEPTION
+            WHEN OTHERS THEN
+                ROLLBACK;
+                pkg_log.log_error(p_message => 'Error while adding a new vaccine',
+                                  p_api     => 'add_vaccine');
+                RAISE;
+        END;
+    END add_vaccine;
+
+    PROCEDURE add_surgery(p_s_name VARCHAR2, p_s_desc VARCHAR2) AS
+    BEGIN
+        IF p_s_name IS NULL THEN
+            pkg_log.log_error(p_message => 'Surgery name cannot be null',
+                              p_api     => 'add_surgery');
+            RAISE_APPLICATION_ERROR(-20011, 'Surgery name cannot be null');
+        END IF;
+
+        BEGIN
+            INSERT INTO surgery
+                (surgery_id, s_name, s_desc)
+            VALUES
+                ('S' || LPAD(seq_surgery_id.nextval, 4, '0'), p_s_name, p_s_desc);
+            COMMIT;
+        
+        EXCEPTION
+            WHEN OTHERS THEN
+                ROLLBACK;
+                pkg_log.log_error(p_message => 'Error while adding a new surgery',
+                                  p_api     => 'add_surgery');
+                RAISE;
+        END;
+    END add_surgery;
+
+    PROCEDURE add_veterinarian(p_first_name VARCHAR2,
+                               p_last_name VARCHAR2,
+                               p_specialization VARCHAR2,
+                               p_phone VARCHAR2,
+                               p_email VARCHAR2) IS
+    BEGIN
+        IF p_first_name IS NULL THEN
+            pkg_log.log_error(p_message => 'First name cannot be null',
+                              p_api     => 'add_veterinarian');
+            RAISE_APPLICATION_ERROR(-20006, 'First name cannot be null');
+        END IF;
+
+        IF p_last_name IS NULL THEN
+            pkg_log.log_error(p_message => 'Last name cannot be null',
+                              p_api     => 'add_veterinarian');
+            RAISE_APPLICATION_ERROR(-20007, 'Last name cannot be null');
+        END IF;
+
+        IF p_specialization IS NULL THEN
+            pkg_log.log_error(p_message => 'Specialization cannot be null',
+                              p_api     => 'add_veterinarian');
+            RAISE_APPLICATION_ERROR(-20008, 'Specialization cannot be null');
+        END IF;
+
+        IF p_phone IS NULL AND p_email IS NULL THEN
+            pkg_log.log_error(p_message => 'Either phone or email must be provided',
+                              p_api     => 'add_veterinarian');
+            RAISE_APPLICATION_ERROR(-20009,
+                                    'Either phone or email must be provided');
+        END IF;
+
+        BEGIN
+            INSERT INTO veterinarian
+                (veterinarian_id,
+                 first_name,
+                 last_name,
+                 specialization,
+                 phone,
+                 email)
+            VALUES
+                (seq_veterinarian_id.nextval,
+                 p_first_name,
+                 p_last_name,
+                 p_specialization,
+                 p_phone,
+                 p_email);
+            COMMIT;
+        
+        EXCEPTION
+            WHEN OTHERS THEN
+                ROLLBACK;
+                pkg_log.log_error(p_message => 'Error while adding veterinarian',
+                                  p_api     => 'add_veterinarian');
+                RAISE;
+        END;
+    END add_veterinarian;
+
+END healthcare_pgk;
+/
