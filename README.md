@@ -62,9 +62,10 @@ This package contains procedures for logging errors in the system.
     - `backtrace` The backtrace of the error.
 ---
 ### [healthcare_pgk](https://github.com/PinchToDebug/Adatb2/blob/main/10_pkg_healthcare.pkg)
-- `add_vaccine` Adds a new vaccine to the `vaccines` table.
-- `add_surgery` Adds a new surgery to the `surgeries` table.
-- `add_veterinarian` Adds a veterinarian to the `veterinarians` table.
+- **Procedures**:
+  - `add_vaccine` Adds a new vaccine to the `vaccines` table.
+  - `add_surgery` Adds a new surgery to the `surgeries` table.
+  - `add_veterinarian` Adds a veterinarian to the `veterinarians` table.
 ---
 ### Triggers
 - [`trg_update_pet_status`](https://github.com/PinchToDebug/Adatb2/blob/main/07_tr_update_pet_status.trg) Updates the pet's status to 'Pending' in the `pets` table after an adoption request is inserted.
