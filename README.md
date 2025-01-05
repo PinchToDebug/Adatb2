@@ -70,7 +70,7 @@ This package contains procedures for logging errors in the system.
 ### Triggers
 - [`trg_update_pet_status`](https://github.com/PinchToDebug/Adatb2/blob/main/07_tr_update_pet_status.trg) Updates the pet's status to 'Pending' in the `pet` table after an adoption request is inserted.
 - [`trg_log_pet_changes`](https://github.com/PinchToDebug/Adatb2/blob/main/08_tr_log_pet_changes.trg) Logs changes to the `pet` table (INSERT, UPDATE, DELETE) into the `pet_log` table.
-- [`trg_update_pet_on_reject`](https://github.com/PinchToDebug/Adatb2/blob/main/08_tr_update_pet_status_on_reject.trg) Updates a pet's status to 'Available' in the `pets` table if an adoption request is updated to 'Rejected'.
+- [`trg_update_pet_on_reject`](https://github.com/PinchToDebug/Adatb2/blob/main/08_tr_update_pet_status_on_reject.trg) Updates a pet's status to 'Available' in the `pet` table if an adoption request is updated to 'Rejected'.
 - [`trg_prevent_pending_adoption`](https://github.com/PinchToDebug/Adatb2/blob/main/10_tr_prevent_pending_adoption.trg) Prevents a new adoption request from being inserted if there is already a pending request for the same pet.
 - [`id_triggers`](https://github.com/PinchToDebug/Adatb2/blob/main/15_id_triggers.sql) Increments ID-s.
 ---
