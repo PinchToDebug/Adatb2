@@ -61,7 +61,7 @@ This package contains procedures for logging errors in the system.
     - `api` The API name passed in `p_api`.
     - `backtrace` The backtrace of the error.
 ---
-### [healthcare_pgk](https://github.com/PinchToDebug/Adatb2/blob/main/10_pkg_healthcare.pkg)
+### [healthcare_pkg](https://github.com/PinchToDebug/Adatb2/blob/main/10_pkg_healthcare.pkg)
 - **Procedures**:
   - `add_vaccine` Adds a new vaccine to the `vaccines` table.
   - `add_surgery` Adds a new surgery to the `surgeries` table.
