@@ -24,7 +24,7 @@ The project includes:
 ### [Tables](https://github.com/PinchToDebug/Adatb2/blob/main/02_init_tables.sql)
    - `pet` stores pet details.
    - `adoption_request` stores adoption requests.
-   - `adoptes` Stores adopter details.
+   - `adopter` Stores adopter details.
    - `medical_history` stores medical history records for pets.
    - `vaccine` stores vaccine details.
    - `surgery` stores surgery details.
