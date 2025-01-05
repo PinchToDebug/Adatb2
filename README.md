@@ -22,13 +22,13 @@ The project includes:
 
 ---
 ### [Tables](https://github.com/PinchToDebug/Adatb2/blob/main/02_init_tables.sql)
-   - `pets` stores pet details.
-   - `adoption_requests` stores adoption requests.
-   - `adopters` Stores adopter details.
+   - `pet` stores pet details.
+   - `adoption_request` stores adoption requests.
+   - `adopter` Stores adopter details.
    - `medical_history` stores medical history records for pets.
-   - `vaccines` stores vaccine details.
-   - `surgeries` stores surgery details.
-   - `veterinarians` stores veterinarian details.
+   - `vaccine` stores vaccine details.
+   - `surgery` stores surgery details.
+   - `veterinarian` stores veterinarian details.
    - `pet_log` stores changes to pets in `pets` table.
    - `log` stores occured errors.
 ---
@@ -40,6 +40,7 @@ This package contains procedures and functions for managing adoption-related ope
   - `add_adopter`: Adds a new adopter.
   - `manage_adoption_request`: Manages adoption requests (Approve/Reject).
   - `add_pet`: Adds a new pet.
+  - `add_medical_record` Adds a medical record to the `medical_history` table.
 
 - **Functions**:
   - `fn_is_pet_available`: Returns 'Yes' or 'No' depending on whether the pet is available for adoption based on `pet_id`.
@@ -60,11 +61,11 @@ This package contains procedures for logging errors in the system.
     - `api` The API name passed in `p_api`.
     - `backtrace` The backtrace of the error.
 ---
-### Procedures
-- [`add_vaccine`](https://github.com/PinchToDebug/Adatb2/blob/main/11_add_vaccine.prc) Adds a new vaccine to the `vaccines` table.
-- [`add_surgery`](https://github.com/PinchToDebug/Adatb2/blob/main/12_add_surgery.prc) Adds a new surgery to the `surgeries` table.
-- [`add_medical_record`](https://github.com/PinchToDebug/Adatb2/blob/main/14_add_medical_record.prc) Adds a medical record to the `medical_history` table.
-- [`add_veterinarian`](https://github.com/PinchToDebug/Adatb2/blob/main/14_add_veterinarian.prc) Adds a veterinarian to the `veterinarians` table.
+### [healthcare_pgk](https://github.com/PinchToDebug/Adatb2/blob/main/10_pkg_healthcare.pkg)
+- **Procedures**:
+  - `add_vaccine` Adds a new vaccine to the `vaccines` table.
+  - `add_surgery` Adds a new surgery to the `surgeries` table.
+  - `add_veterinarian` Adds a veterinarian to the `veterinarians` table.
 ---
 ### Triggers
 - [`trg_update_pet_status`](https://github.com/PinchToDebug/Adatb2/blob/main/07_tr_update_pet_status.trg) Updates the pet's status to 'Pending' in the `pets` table after an adoption request is inserted.
