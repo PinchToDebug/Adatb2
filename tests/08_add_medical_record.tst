@@ -16,7 +16,7 @@ end;
 6
 p_pet_id
 1
-1001
+1000
 5
 p_treatment_type
 1
