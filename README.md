@@ -22,13 +22,13 @@ The project includes:
 
 ---
 ### [Tables](https://github.com/PinchToDebug/Adatb2/blob/main/02_init_tables.sql)
-   - `pets` stores pet details.
-   - `adoption_requests` stores adoption requests.
-   - `adopters` Stores adopter details.
+   - `pet` stores pet details.
+   - `adoption_request` stores adoption requests.
+   - `adoptes` Stores adopter details.
    - `medical_history` stores medical history records for pets.
-   - `vaccines` stores vaccine details.
-   - `surgeries` stores surgery details.
-   - `veterinarians` stores veterinarian details.
+   - `vaccine` stores vaccine details.
+   - `surgery` stores surgery details.
+   - `veterinarian` stores veterinarian details.
    - `pet_log` stores changes to pets in `pets` table.
    - `log` stores occured errors.
 ---
