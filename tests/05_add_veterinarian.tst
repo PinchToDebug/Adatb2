@@ -2,7 +2,7 @@ PL/SQL Developer Test script 3.0
 10
 begin
   -- Either email or phone must be provided
-  healthcare_pgk.add_veterinarian(p_first_name     => :p_first_name,
+  healthcare_pkg.add_veterinarian(p_first_name     => :p_first_name,
                                   p_last_name      => :p_last_name,
                                   p_specialization => :p_specialization,
                                   p_phone          => :p_phone,

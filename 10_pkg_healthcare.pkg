@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE healthcare_pgk AS
+CREATE OR REPLACE PACKAGE healthcare_pkg AS
   PROCEDURE add_vaccine(p_v_name VARCHAR2, p_v_desc VARCHAR2);
   PROCEDURE add_surgery(p_s_name VARCHAR2, p_s_desc VARCHAR2);
   PROCEDURE add_veterinarian(p_first_name VARCHAR2,
@@ -6,9 +6,9 @@ CREATE OR REPLACE PACKAGE healthcare_pgk AS
                                p_specialization VARCHAR2,
                                p_phone VARCHAR2,
                                p_email VARCHAR2);
-END healthcare_pgk;
+END healthcare_pkg;
 /
-CREATE OR REPLACE PACKAGE BODY healthcare_pgk AS
+CREATE OR REPLACE PACKAGE BODY healthcare_pkg AS
     PROCEDURE add_vaccine(p_v_name VARCHAR2, p_v_desc VARCHAR2) AS
     BEGIN
         IF p_v_name IS NULL THEN
@@ -114,5 +114,5 @@ CREATE OR REPLACE PACKAGE BODY healthcare_pgk AS
         END;
     END add_veterinarian;
 
-END healthcare_pgk;
+END healthcare_pkg;
 /
